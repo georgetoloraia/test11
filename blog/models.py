@@ -12,7 +12,7 @@ class Category(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='blog_images/')
+    image = models.URLField()
     publish_date = models.DateTimeField()
     categories = models.ManyToManyField(Category)
     author = models.CharField(max_length=255)
