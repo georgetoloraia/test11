@@ -23,10 +23,13 @@ class BlogDetail(generics.RetrieveAPIView):
     serializer_class = BlogSerializer
 
 
+
+
+
 class LoginView(APIView):
+    
     def post(self, request):
         email = request.data.get('email')
-        # password = request.data.get('password')
 
         user = authenticate(request, email=email)
 
