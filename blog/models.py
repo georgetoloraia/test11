@@ -1,22 +1,27 @@
-# blog/models.py
 from django.db import models
 
-class Category(models.Model):
-    title = models.CharField(max_length=255)
+class BlogModel(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    publish_date = models.DateTimeField()
+    description = models.TextField()
+    categories = models.ManyToManyField('CategoryModel')
+    image = models.ImageField(upload_to='blogs/')
+
+    def __str__(self):
+        return self.title
+
+class CategoryModel(models.Model):
+    title = models.CharField(max_length=100)
     text_color = models.CharField(max_length=7)
     background_color = models.CharField(max_length=7)
 
     def __str__(self):
         return self.title
 
-class Blog(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    image = models.ImageField(upload_to='blog_images/')
-    publish_date = models.DateTimeField()
-    categories = models.ManyToManyField(Category)
-    author = models.CharField(max_length=255)
-    email = models.EmailField()
+class UserModel(models.Model):
+    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.title
+        return self.username
